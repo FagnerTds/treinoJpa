@@ -2,25 +2,25 @@ package com.devsuperior.aula.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "tb_department")
-public class Department {
+@Table(name = "tb_category")
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "department")
-    private List<Person> people = new ArrayList<>();
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
-    public Department() {
+    public Category() {
     }
 
-    public Department(Long id, String name) {
+    public Category(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -41,7 +41,7 @@ public class Department {
         this.name = name;
     }
 
-    public List<Person> getPeople() {
-        return people;
+    public Set<Product> getProducts() {
+        return products;
     }
 }
